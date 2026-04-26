@@ -12,6 +12,8 @@
   --wrong: #8b2c2c;
   --cta-gold: #c9a961;
   --font: 'Heebo', sans-serif;
+  --hole: 10px;
+  --spacing: 18px;
 }
 
 /* ===== Reset & Base ===== */
@@ -38,6 +40,16 @@ button { cursor: pointer; border: none; font-family: var(--font); }
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.bg-hero {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .bg-noise-overlay {
@@ -100,13 +112,13 @@ button { cursor: pointer; border: none; font-family: var(--font); }
   font-weight: 800;
   padding: 0.9rem 2.5rem;
   border-radius: 4px;
-  transition: transform 0.15s, brightness 0.15s;
+  transition: transform 0.15s, filter 0.15s;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.btn-cta:hover { filter: brightness(1.1); transform: scale(1.03); }
+.btn-cta:hover  { filter: brightness(1.1); transform: scale(1.03); }
 .btn-cta:active { transform: scale(0.98); }
 
 .btn-next {
@@ -121,7 +133,6 @@ button { cursor: pointer; border: none; font-family: var(--font); }
   gap: 1.5rem;
   width: 100%;
   max-width: 900px;
-  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -132,18 +143,26 @@ button { cursor: pointer; border: none; font-family: var(--font); }
 }
 
 .question-counter {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--accent-gold);
   margin-top: 1rem;
 }
 
 .question-text {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: var(--paper-cream);
+  margin-top: 0.6rem;
+  line-height: 1.55;
+}
+
+.swipe-hint {
   margin-top: 0.75rem;
-  line-height: 1.5;
+  font-size: 0.8rem;
+  color: var(--paper-aged);
+  opacity: 0.65;
+  letter-spacing: 0.03em;
 }
 
 /* ===== Side Buttons ===== */
@@ -166,7 +185,7 @@ button { cursor: pointer; border: none; font-family: var(--font); }
 .side-btn--yes { background: var(--btn-yes); }
 .side-btn--no  { background: var(--btn-no); }
 
-.side-btn:hover { filter: brightness(1.15); transform: scale(1.05); }
+.side-btn:hover  { filter: brightness(1.15); transform: scale(1.05); }
 .side-btn:active { transform: scale(0.97); }
 .side-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
@@ -176,19 +195,34 @@ button { cursor: pointer; border: none; font-family: var(--font); }
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 500px;
+  max-width: 480px;
   width: 100%;
+  padding: 0 0.5rem;
 }
 
-.answer-content {
-  padding: 2rem 1.5rem;
-  text-align: center;
-  height: 100%;
+/* Perforated stamp card for answer — auto height, no 3D flip needed */
+.answer-stamp {
+  width: 100%;
+  padding: 2rem 1.75rem;
+  background: var(--paper-cream);
+  -webkit-mask:
+    radial-gradient(circle at var(--hole) 50%, transparent var(--hole), black calc(var(--hole) + 1px)) top / var(--spacing) 100% repeat-x,
+    radial-gradient(circle at calc(100% - var(--hole)) 50%, transparent var(--hole), black calc(var(--hole) + 1px)) top / var(--spacing) 100% repeat-x,
+    radial-gradient(circle at 50% var(--hole), transparent var(--hole), black calc(var(--hole) + 1px)) left / 100% var(--spacing) repeat-y,
+    radial-gradient(circle at 50% calc(100% - var(--hole)), transparent var(--hole), black calc(var(--hole) + 1px)) left / 100% var(--spacing) repeat-y;
+  mask:
+    radial-gradient(circle at var(--hole) 50%, transparent var(--hole), black calc(var(--hole) + 1px)) top / var(--spacing) 100% repeat-x,
+    radial-gradient(circle at calc(100% - var(--hole)) 50%, transparent var(--hole), black calc(var(--hole) + 1px)) top / var(--spacing) 100% repeat-x,
+    radial-gradient(circle at 50% var(--hole), transparent var(--hole), black calc(var(--hole) + 1px)) left / 100% var(--spacing) repeat-y,
+    radial-gradient(circle at 50% calc(100% - var(--hole)), transparent var(--hole), black calc(var(--hole) + 1px)) left / 100% var(--spacing) repeat-y;
+  -webkit-mask-composite: intersect;
+  mask-composite: intersect;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  border: 3px solid var(--accent-gold);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 1rem;
+  align-items: center;
 }
 
 .answer-verdict {
@@ -198,12 +232,13 @@ button { cursor: pointer; border: none; font-family: var(--font); }
 }
 
 .answer-correct .answer-verdict { color: var(--correct); }
-.answer-wrong .answer-verdict   { color: var(--wrong); }
+.answer-wrong   .answer-verdict { color: var(--wrong); }
 
 .answer-explanation {
   font-size: 1rem;
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--ink-dark);
+  text-align: right;
 }
 
 .answer-badge {
@@ -249,9 +284,35 @@ button { cursor: pointer; border: none; font-family: var(--font); }
   margin-bottom: 2rem;
 }
 
-/* ===== Responsive ===== */
+/* ===== Mobile ===== */
 @media (max-width: 600px) {
-  .question-layout { flex-direction: column; }
-  .side-btn { writing-mode: horizontal-tb; width: 100%; min-height: 60px; font-size: 1.2rem; }
+  .screen { padding: 1rem 0.75rem; align-items: flex-start; padding-top: 1.5rem; }
+
+  /* Question layout: card on top, buttons row below */
+  .question-layout {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .question-center {
+    order: -1;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .side-btn {
+    writing-mode: horizontal-tb;
+    flex: 1 1 0;
+    min-height: 52px;
+    font-size: 1.1rem;
+    max-width: calc(50% - 0.5rem);
+  }
+
+  .swipe-hint { font-size: 0.75rem; }
+
   .welcome-title { font-size: 4rem; }
+
+  .answer-stamp { padding: 1.5rem 1.25rem; }
+
+  .answer-explanation { font-size: 0.95rem; }
 }

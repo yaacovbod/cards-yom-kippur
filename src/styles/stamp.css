@@ -3,14 +3,14 @@
 .stamp-scene {
   perspective: 1000px;
   width: 100%;
-  max-width: 420px;
-  min-height: 340px;
+  max-width: 280px;
+  min-height: 380px;
   margin: 0 auto;
 }
 
 .stamp-card {
   width: 100%;
-  height: 340px;
+  height: 380px;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.65s ease;
@@ -20,13 +20,13 @@
   transform: rotateY(180deg);
 }
 
+/* ===== Perforated stamp mask (shared) ===== */
 .stamp-body {
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   background: var(--paper-cream);
-  /* Perforated stamp edges using radial-gradient mask */
   --hole: 10px;
   --spacing: 18px;
   -webkit-mask:
@@ -79,10 +79,58 @@
   background: var(--paper-aged);
 }
 
-/* Placeholder when no image */
 .stamp-front:not(:has(.stamp-image)) {
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--paper-cream), var(--paper-aged));
+}
+
+/* ===== Swipe Card ===== */
+.swipe-card {
+  position: relative;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  width: 100%;
+}
+
+.swipe-card:active { cursor: grabbing; }
+
+.swipe-label {
+  position: absolute;
+  top: 18px;
+  z-index: 10;
+  padding: 5px 14px;
+  border-radius: 4px;
+  font-size: 1.4rem;
+  font-weight: 900;
+  pointer-events: none;
+  font-family: var(--font);
+  border: 3px solid;
+  transition: opacity 0.08s;
+}
+
+/* "היה" appears at physical left when dragging right */
+.swipe-label--yes {
+  left: 16px;
+  transform: rotate(-12deg);
+  color: var(--correct);
+  border-color: var(--correct);
+  background: rgba(74, 107, 44, 0.15);
+}
+
+/* "לא היה" appears at physical right when dragging left */
+.swipe-label--no {
+  right: 16px;
+  transform: rotate(12deg);
+  color: var(--wrong);
+  border-color: var(--wrong);
+  background: rgba(139, 44, 44, 0.15);
+}
+
+/* ===== Responsive stamp sizing ===== */
+@media (max-width: 480px) {
+  .stamp-scene { min-height: 240px; }
+  .stamp-card  { height: 240px; }
 }

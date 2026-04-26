@@ -4,17 +4,25 @@
 משחק חידון "היה או לא היה" בסגנון N12 לשימוש בכיתה בנושא מלחמת יום הכיפורים (1973). התלמידים מנחשים אם טענות היסטוריות הן אמיתיות או בדויות.
 
 ## טכנולוגיות
-- React 18 + TypeScript
+- React 19 + TypeScript
 - Vite (build tool)
 - canvas-confetti (אפקט תשובה נכונה)
 - Heebo font (Google Fonts)
 - CSS Modules + design tokens (ללא Tailwind)
 
 ## מבנה קבצים מרכזי
-- `src/components/StampCard.tsx` - רכיב הבול המרכזי עם אנימציית הפיכה
-- `src/components/SideButton.tsx` - כפתורי "היה" / "לא היה" בצדדי הבול
+- `src/App.tsx` - נקודת כניסה, מנהל מצבי המשחק ומנתב בין מסכים
+- `src/components/WelcomeScreen.tsx` - מסך פתיחה
+- `src/components/QuestionScreen.tsx` - מסך שאלה פעילה
+- `src/components/AnswerScreen.tsx` - מסך חשיפת תשובה
+- `src/components/ResultScreen.tsx` - מסך סיום עם ניקוד
+- `src/components/StampCard.tsx` - רכיב הבול עם אנימציית הפיכה
+- `src/components/SideButton.tsx` - כפתורי "היה" / "לא היה"
+- `src/components/Background.tsx` - רקע קבוע לאורך המשחק
+- `src/components/Confetti.tsx` - אפקט קונפטי לתשובה נכונה
 - `src/hooks/useQuiz.ts` - state machine של המשחק (welcome/question/revealed/result)
-- `src/data/questions.ts` - מערך השאלות (תוכן ימולא בשלב נפרד)
+- `src/hooks/useSwipe.ts` - זיהוי swipe למובייל
+- `src/data/questions.ts` - מערך השאלות
 - `src/types/question.ts` - טיפוס Question
 - `src/styles/stamp.css` - עיצוב הבול עם שוליים מנוקבים ו-flip animation
 - `public/stamps/` - תיקייה לאיורים/תמונות לכל שאלה

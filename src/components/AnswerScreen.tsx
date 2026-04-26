@@ -1,5 +1,4 @@
 import type { Question } from '../types/question';
-import { StampCard } from './StampCard';
 import { Confetti } from './Confetti';
 
 type AnswerScreenProps = {
@@ -15,12 +14,10 @@ export function AnswerScreen({ question, correct, onNext }: AnswerScreenProps) {
     <div className="screen answer-screen">
       <Confetti trigger={correct} />
       <div className="answer-layout">
-        <StampCard flipped>
-          <div className={`answer-content ${correct ? 'answer-correct' : 'answer-wrong'}`}>
-            <h2 className="answer-verdict">{verdict}</h2>
-            <p className="answer-explanation">{question.explanation}</p>
-          </div>
-        </StampCard>
+        <div className={`answer-stamp ${correct ? 'answer-correct' : 'answer-wrong'}`}>
+          <h2 className="answer-verdict">{verdict}</h2>
+          <p className="answer-explanation">{question.explanation}</p>
+        </div>
         <div className={`answer-badge ${correct ? 'badge-correct' : 'badge-wrong'}`}>
           {correct ? 'צדקת!' : 'טעית'}
         </div>

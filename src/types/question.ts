@@ -1,6 +1,6 @@
 export type Question = {
   id: number;
-  imageSrc: string;
+  imageSrc?: string;
   imageCredit?: string;
   text: string;
   isTrue: boolean;
