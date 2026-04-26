@@ -1,13 +1,15 @@
 import type { Question } from '../types/question';
 import { Confetti } from './Confetti';
+import { formatTime } from '../hooks/useQuiz';
 
 type AnswerScreenProps = {
   question: Question;
   correct: boolean;
+  elapsed: number;
   onNext: () => void;
 };
 
-export function AnswerScreen({ question, correct, onNext }: AnswerScreenProps) {
+export function AnswerScreen({ question, correct, elapsed, onNext }: AnswerScreenProps) {
   const verdict = question.isTrue ? 'היה' : 'לא היה';
 
   return (
@@ -21,6 +23,7 @@ export function AnswerScreen({ question, correct, onNext }: AnswerScreenProps) {
         <div className={`answer-badge ${correct ? 'badge-correct' : 'badge-wrong'}`}>
           {correct ? 'צדקת!' : 'טעית'}
         </div>
+        <span className="quiz-timer quiz-timer--answer">{formatTime(elapsed)}</span>
         <button className="btn-cta btn-next" onClick={onNext}>
           הבא
         </button>

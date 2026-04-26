@@ -3,6 +3,7 @@ import type { Question } from '../types/question';
 import { StampCard } from './StampCard';
 import { SideButton } from './SideButton';
 import { useSwipe } from '../hooks/useSwipe';
+import { formatTime } from '../hooks/useQuiz';
 import dayanImg from '../assets/dayan.png';
 import goldaImg from '../assets/golda.png';
 import sadatImg from '../assets/sadat.png';
@@ -14,10 +15,11 @@ type Props = {
   question: Question;
   currentIndex: number;
   total: number;
+  elapsed: number;
   onAnswer: (userSaysTrue: boolean) => void;
 };
 
-export function QuestionScreen({ question, currentIndex, total, onAnswer }: Props) {
+export function QuestionScreen({ question, currentIndex, total, elapsed, onAnswer }: Props) {
   const handleNo  = useCallback(() => onAnswer(false), [onAnswer]);
   const handleYes = useCallback(() => onAnswer(true),  [onAnswer]);
   const { dragX, pointerHandlers } = useSwipe(handleNo, handleYes);
@@ -47,10 +49,13 @@ export function QuestionScreen({ question, currentIndex, total, onAnswer }: Prop
             <div className="swipe-label swipe-label--no" style={{ opacity: dragX < -5 ? labelOpacity : 0 }}>
               לא היה
             </div>
-            <StampCard imageSrc={leaderImages[currentIndex % leaderImages.length]} />
+            <StampCard key={currentIndex} imageSrc={leaderImages[currentIndex % leaderImages.length]} />
           </div>
 
-          <p className="question-counter">{currentIndex + 1} / {total}</p>
+          <div className="question-meta">
+            <span className="question-counter">{currentIndex + 1} / {total}</span>
+            <span className="quiz-timer">{formatTime(elapsed)}</span>
+          </div>
           <p className="question-text">{question.text}</p>
           <p className="swipe-hint">ימינה: היה &nbsp;|&nbsp; שמאלה: לא היה</p>
         </div>

@@ -6,7 +6,7 @@ import { ResultScreen } from './components/ResultScreen';
 import { useQuiz } from './hooks/useQuiz';
 
 export default function App() {
-  const { state, currentQuestion, currentIndex, total, score, lastAnswerCorrect, start, answer, next, restart } =
+  const { state, currentQuestion, currentIndex, total, score, elapsed, finalTime, lastAnswerCorrect, start, answer, next, restart } =
     useQuiz();
 
   return (
@@ -17,13 +17,14 @@ export default function App() {
           question={currentQuestion}
           currentIndex={currentIndex}
           total={total}
+          elapsed={elapsed}
           onAnswer={answer}
         />
       )}
       {state === 'revealed' && currentQuestion && (
-        <AnswerScreen question={currentQuestion} correct={lastAnswerCorrect} onNext={next} />
+        <AnswerScreen question={currentQuestion} correct={lastAnswerCorrect} elapsed={elapsed} onNext={next} />
       )}
-      {state === 'result' && <ResultScreen score={score} total={total} onRestart={restart} />}
+      {state === 'result' && <ResultScreen score={score} total={total} finalTime={finalTime} onRestart={restart} />}
     </Background>
   );
 }

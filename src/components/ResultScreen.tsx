@@ -1,10 +1,13 @@
+import { formatTime } from '../hooks/useQuiz';
+
 type ResultScreenProps = {
   score: number;
   total: number;
+  finalTime: number;
   onRestart: () => void;
 };
 
-export function ResultScreen({ score, total, onRestart }: ResultScreenProps) {
+export function ResultScreen({ score, total, finalTime, onRestart }: ResultScreenProps) {
   const percent = Math.round((score / total) * 100);
 
   const getMessage = () => {
@@ -23,6 +26,7 @@ export function ResultScreen({ score, total, onRestart }: ResultScreenProps) {
           <span className="result-total"> / {total}</span>
         </div>
         <p className="result-message">{getMessage()}</p>
+        <p className="result-time">זמן: {formatTime(finalTime)}</p>
         <button className="btn-cta" onClick={onRestart}>
           שחקו שוב
         </button>
