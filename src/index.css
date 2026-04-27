@@ -231,18 +231,20 @@ button { cursor: pointer; border: none; font-family: var(--font); }
   width: 100%;
   padding: 2rem 1.75rem;
   background: var(--paper-cream);
+  --hole: 9px;
+  --spacing: 18px;
   -webkit-mask:
-    radial-gradient(circle at var(--hole) 50%, transparent var(--hole), black calc(var(--hole) + 1px)) top / var(--spacing) 100% repeat-x,
-    radial-gradient(circle at calc(100% - var(--hole)) 50%, transparent var(--hole), black calc(var(--hole) + 1px)) top / var(--spacing) 100% repeat-x,
-    radial-gradient(circle at 50% var(--hole), transparent var(--hole), black calc(var(--hole) + 1px)) left / 100% var(--spacing) repeat-y,
-    radial-gradient(circle at 50% calc(100% - var(--hole)), transparent var(--hole), black calc(var(--hole) + 1px)) left / 100% var(--spacing) repeat-y;
+    radial-gradient(circle at 50% 0,    #0000 var(--hole), #000 calc(var(--hole) + 1px)) 0 0   / var(--spacing) calc(2 * var(--hole)) repeat-x,
+    radial-gradient(circle at 50% 100%, #0000 var(--hole), #000 calc(var(--hole) + 1px)) 0 100% / var(--spacing) calc(2 * var(--hole)) repeat-x,
+    radial-gradient(circle at 0   50%,  #0000 var(--hole), #000 calc(var(--hole) + 1px)) 0 0   / calc(2 * var(--hole)) var(--spacing) repeat-y,
+    radial-gradient(circle at 100% 50%, #0000 var(--hole), #000 calc(var(--hole) + 1px)) 100% 0 / calc(2 * var(--hole)) var(--spacing) repeat-y,
+    linear-gradient(#000, #000) calc(2 * var(--hole)) calc(2 * var(--hole)) / calc(100% - 4 * var(--hole)) calc(100% - 4 * var(--hole)) no-repeat;
   mask:
-    radial-gradient(circle at var(--hole) 50%, transparent var(--hole), black calc(var(--hole) + 1px)) top / var(--spacing) 100% repeat-x,
-    radial-gradient(circle at calc(100% - var(--hole)) 50%, transparent var(--hole), black calc(var(--hole) + 1px)) top / var(--spacing) 100% repeat-x,
-    radial-gradient(circle at 50% var(--hole), transparent var(--hole), black calc(var(--hole) + 1px)) left / 100% var(--spacing) repeat-y,
-    radial-gradient(circle at 50% calc(100% - var(--hole)), transparent var(--hole), black calc(var(--hole) + 1px)) left / 100% var(--spacing) repeat-y;
-  -webkit-mask-composite: intersect;
-  mask-composite: intersect;
+    radial-gradient(circle at 50% 0,    #0000 var(--hole), #000 calc(var(--hole) + 1px)) 0 0   / var(--spacing) calc(2 * var(--hole)) repeat-x,
+    radial-gradient(circle at 50% 100%, #0000 var(--hole), #000 calc(var(--hole) + 1px)) 0 100% / var(--spacing) calc(2 * var(--hole)) repeat-x,
+    radial-gradient(circle at 0   50%,  #0000 var(--hole), #000 calc(var(--hole) + 1px)) 0 0   / calc(2 * var(--hole)) var(--spacing) repeat-y,
+    radial-gradient(circle at 100% 50%, #0000 var(--hole), #000 calc(var(--hole) + 1px)) 100% 0 / calc(2 * var(--hole)) var(--spacing) repeat-y,
+    linear-gradient(#000, #000) calc(2 * var(--hole)) calc(2 * var(--hole)) / calc(100% - 4 * var(--hole)) calc(100% - 4 * var(--hole)) no-repeat;
   box-shadow: 0 8px 32px rgba(0,0,0,0.5);
   border: 3px solid var(--accent-gold);
   display: flex;
