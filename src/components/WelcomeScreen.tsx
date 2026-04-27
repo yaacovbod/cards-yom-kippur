@@ -22,7 +22,7 @@ export function WelcomeScreen({ onStart }: WelcomeScreenProps) {
           המשימה שלכם להחליט.
         </p>
         <button className="btn-cta" onClick={onStart}>
-          <span>⇒</span> התחילו לשחק
+          התחילו לשחק
         </button>
       </div>
     </div>
