@@ -30,7 +30,7 @@ body {
 
 #root { min-height: 100dvh; }
 
-button { cursor: pointer; border: none; font-family: var(--font); }
+button { cursor: pointer; border: none; font-family: var(--font); touch-action: manipulation; }
 
 /* ===== Background ===== */
 .bg-root {
@@ -176,7 +176,7 @@ button { cursor: pointer; border: none; font-family: var(--font); }
 }
 
 .question-text {
-  font-size: 1.2rem;
+  font-size: clamp(0.95rem, 3vw, 1.2rem);
   font-weight: 700;
   color: var(--paper-cream);
   margin-top: 0.6rem;

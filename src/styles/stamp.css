@@ -149,6 +149,6 @@
 
 /* ===== Responsive stamp sizing ===== */
 @media (max-width: 480px) {
-  .stamp-scene { min-height: 240px; }
-  .stamp-card  { height: 240px; }
+  .stamp-scene { min-height: 300px; }
+  .stamp-card  { height: 300px; }
 }
