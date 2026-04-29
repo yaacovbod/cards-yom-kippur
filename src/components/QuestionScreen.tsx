@@ -10,6 +10,7 @@ import sadatImg from '../assets/sadat.png';
 import assadImg from '../assets/assad.png';
 
 const leaderImages = [dayanImg, goldaImg, sadatImg, assadImg];
+const leaderPositions = ['center top', 'center top', 'center 15%', 'center 15%'];
 
 type Props = {
   question: Question;
@@ -49,7 +50,7 @@ export function QuestionScreen({ question, currentIndex, total, elapsed, onAnswe
             <div className="swipe-label swipe-label--no" style={{ opacity: dragX < -5 ? labelOpacity : 0 }}>
               לא היה
             </div>
-            <StampCard key={currentIndex} imageSrc={leaderImages[currentIndex % leaderImages.length]} />
+            <StampCard key={currentIndex} imageSrc={leaderImages[currentIndex % leaderImages.length]} imagePosition={leaderPositions[currentIndex % leaderPositions.length]} />
           </div>
 
           <div className="question-meta">

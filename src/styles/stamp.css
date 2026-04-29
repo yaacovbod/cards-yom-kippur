@@ -84,6 +84,7 @@
   width: 100%;
   flex: 1;
   object-fit: cover;
+  object-position: center top;
   filter: sepia(20%) contrast(1.05);
 }
 
